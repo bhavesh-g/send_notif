@@ -1,0 +1,26 @@
+<html>
+<head>
+  <title>Notification sender App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+Send Notification
+<form id="notificationForm">
+    <div>
+        <input style="width: 100%" readonly placeholder="Current time will be sent as data to target app" type="text" id="notificationMessage" name="notificationMessage" required>
+    </div>
+    <br>
+    <button type="button" onclick="sendNotification()">Send Notification</button>
+</form>
+
+<script>
+    const socket = io.connect('https://poc-app-z8od.onrender.com/');
+
+    function sendNotification() {
+        const message = new Date().toLocaleTimeString();
+        socket.emit('send_notification', { message });
+    }
+</script>
+
+</body>
+</html>
